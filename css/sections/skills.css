@@ -1,0 +1,32 @@
+.skills-layers {
+  perspective: 1200px;
+}
+
+.skill-layer {
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease-smooth),
+    border-color var(--duration-base) var(--ease-smooth);
+}
+
+.skill-layer:hover {
+  transform: translateY(-4px);
+  border-color: rgba(123, 45, 62, 0.45);
+}
+
+.skill-layer.is-learning {
+  border-style: dashed;
+}
+
+.skill-layer.is-selected {
+  border-color: rgba(123, 45, 62, 0.65);
+  background: rgba(123, 45, 62, 0.12);
+}
+
+.skills-panel {
+  min-height: 84px;
+  padding: var(--space-4);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+}

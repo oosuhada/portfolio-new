@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Portfolio</title>
+    <meta
+      name="description"
+      content="읽는 포트폴리오가 아니라 경험하는 포트폴리오"
+    />
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/typography.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/animations.css" />
+
+    <link rel="stylesheet" href="./css/sections/hero.css" />
+    <link rel="stylesheet" href="./css/sections/bridge.css" />
+    <link rel="stylesheet" href="./css/sections/projects.css" />
+    <link rel="stylesheet" href="./css/sections/skills.css" />
+    <link rel="stylesheet" href="./css/sections/copilot.css" />
+    <link rel="stylesheet" href="./css/sections/about.css" />
+    <link rel="stylesheet" href="./css/sections/contact.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <div class="container header-inner">
+          <a class="brand" href="#hero" aria-label="홈으로 이동">Gabriel</a>
+          <nav class="global-nav" aria-label="주요 섹션">
+            <a href="#hero">Hero</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="hero" class="section section-hero" data-section="hero">
+          <div class="container">
+            <p class="eyebrow">Identity</p>
+            <h1 class="hero-title" data-role-index="0">Developer</h1>
+            <p class="hero-subtitle">
+              나는 코드를 짜는 사람이 아니라, 경험을 빚는 사람입니다.
+            </p>
+            <button class="hero-next" type="button">다음 정체성 보기</button>
+          </div>
+        </section>
+
+        <section
+          id="bridge"
+          class="section section-bridge"
+          data-section="bridge"
+          aria-label="Storytelling"
+        >
+          <div class="container">
+            <p class="eyebrow">Bridge</p>
+            <h2>오프라인 감각을 디지털 경험으로 연결합니다.</h2>
+            <div class="bridge-viewport">
+              <div class="bridge-track" aria-label="커리어 브릿지 타임라인">
+                <article class="bridge-stop">
+                  <h3>와인바 운영</h3>
+                  <p>오프라인에서 사람의 선택을 관찰했다.</p>
+                </article>
+                <article class="bridge-stop">
+                  <h3>Flutter 부트캠프</h3>
+                  <p>서비스라는 개념을 이해하기 시작했다.</p>
+                </article>
+                <article class="bridge-stop">
+                  <h3>UX/UI 부트캠프</h3>
+                  <p>기능이 아니라 경험을 설계하는 사람이 됐다.</p>
+                </article>
+                <article class="bridge-stop">
+                  <h3>AI 풀스택 과정</h3>
+                  <p>아이디어를 끝까지 구현할 수 있게 됐다.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="projects"
+          class="section section-projects"
+          data-section="projects"
+        >
+          <div class="container">
+            <p class="eyebrow">Projects</p>
+            <h2>문제, 해결, 결과로 증명한 프로젝트</h2>
+            <div class="projects-grid" role="list" aria-label="프로젝트 목록">
+              <article class="project-card is-large" role="listitem" tabindex="0">
+                <h3>Uncorked</h3>
+                <p>와인 경험을 디지털 여정으로 번역한 서비스</p>
+              </article>
+              <article class="project-card is-large" role="listitem" tabindex="0">
+                <h3>EZAir</h3>
+                <p>복잡한 항공 탐색을 단순화한 예약 경험</p>
+              </article>
+              <article class="project-card" role="listitem" tabindex="0">
+                <h3>PortfoliOh</h3>
+                <p>하이라이터 중심 포트폴리오 UX 실험</p>
+              </article>
+              <article class="project-card" role="listitem" tabindex="0">
+                <h3>Dev Quest</h3>
+                <p>학습 과정을 제품처럼 설계한 진행형 프로젝트</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" class="section section-skills" data-section="skills">
+          <div class="container">
+            <p class="eyebrow">Skills</p>
+            <h2>기술을 쌓는 대신 문제 해결 레이어를 설계합니다.</h2>
+            <div class="skills-layers" aria-label="기술 레이어">
+              <article class="skill-layer" data-layer="ai">
+                <h3>AI / Product Layer</h3>
+                <p>AI API 연동, 추천 기능, 챗봇 설계</p>
+              </article>
+              <article class="skill-layer" data-layer="backend">
+                <h3>Backend Layer</h3>
+                <p>Python(FastAPI), Java(Spring Boot)</p>
+              </article>
+              <article class="skill-layer is-learning" data-layer="frontend">
+                <h3>Frontend Layer</h3>
+                <p>HTML/CSS/JS, React(학습 중), UX 설계</p>
+              </article>
+            </div>
+            <aside class="skills-panel" aria-live="polite"></aside>
+          </div>
+        </section>
+
+        <section id="about" class="section section-about" data-section="about">
+          <div class="container">
+            <p class="eyebrow">About</p>
+            <h2>스크롤로 완성되는 자기소개</h2>
+            <div class="about-lines">
+              <p class="about-line">
+                오프라인 공간에서 고객 경험을 설계하는 일을 해왔습니다.
+              </p>
+              <p class="about-line">
+                좋은 경험은 물리적 공간뿐 아니라 디지털에서도 설계될 수 있음을
+                깨달았습니다.
+              </p>
+              <p class="about-line">
+                지금은 사용자 경험을 중심으로 웹 서비스를 설계하고 구현하고
+                있습니다.
+              </p>
+              <p class="about-line">
+                프론트엔드부터 백엔드까지 아이디어를 실제 제품으로 완성합니다.
+              </p>
+              <p class="about-line">
+                목표는 더 많은 사람이 실제로 사용하는 서비스를 만드는 것입니다.
+              </p>
+            </div>
+            <a class="about-cta" href="#contact">같이 만들어볼까요?</a>
+          </div>
+        </section>
+
+        <section id="contact" class="section section-contact" data-section="contact">
+          <div class="container">
+            <p class="eyebrow">Contact</p>
+            <h2>같이 만들어볼까요?</h2>
+            <ul class="contact-links">
+              <li><a href="mailto:hello@example.com">Email</a></li>
+              <li><a href="#" aria-label="GitHub">GitHub</a></li>
+              <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <aside id="copilot-root" aria-live="polite" aria-label="AI Co-Pilot"></aside>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

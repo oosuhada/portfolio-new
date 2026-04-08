@@ -1,0 +1,54 @@
+.section-projects .projects-grid {
+  align-items: stretch;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease-smooth),
+    border-color var(--duration-base) var(--ease-smooth);
+}
+
+.project-card.is-large {
+  grid-column: span 6;
+  min-height: 220px;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(123, 45, 62, 0.45);
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(123, 45, 62, 0.18), transparent 55%);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-smooth);
+}
+
+.project-card:hover::after {
+  opacity: 1;
+}
+
+.project-card.is-expanded {
+  position: fixed;
+  inset: 8vh 8vw;
+  z-index: 90;
+  margin: 0;
+  transform: none;
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 768px) {
+  .project-card.is-large {
+    grid-column: auto;
+  }
+
+  .project-card.is-expanded {
+    inset: 5vh 5vw;
+  }
+}

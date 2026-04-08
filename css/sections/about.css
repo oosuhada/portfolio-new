@@ -1,0 +1,28 @@
+.about-lines {
+  max-width: 70ch;
+}
+
+.about-line {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+    transform var(--duration-slow) var(--ease-smooth);
+}
+
+.about-line.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-cta {
+  display: inline-flex;
+  margin-top: var(--space-4);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+}
+
+.about-cta:hover {
+  background: var(--accent-hover);
+}

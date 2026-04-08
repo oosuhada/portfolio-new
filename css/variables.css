@@ -1,0 +1,67 @@
+:root {
+  /* Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --text-primary: #f5f5f5;
+  --text-secondary: #888888;
+  --text-muted: #444444;
+  --accent: #7b2d3e;
+  --accent-hover: #9e3a4f;
+  --accent-glow: rgba(123, 45, 62, 0.3);
+
+  /* Typography */
+  --font-display: "Editorial New", "Playfair Display", serif;
+  --font-body: "Neue Haas Grotesk", "Helvetica Neue", "Noto Sans KR", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "SFMono-Regular", monospace;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: clamp(1.5rem, 2.2vw, 2rem);
+  --text-3xl: clamp(2rem, 3.8vw, 3.5rem);
+  --text-hero: clamp(2.75rem, 8vw, 7.5rem);
+
+  /* Layout & spacing */
+  --section-padding: clamp(80px, 12vw, 160px);
+  --container-max: 1280px;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Radius & depth */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.28);
+  --shadow-glass: 0 8px 24px rgba(0, 0, 0, 0.24);
+
+  /* Motion & glass */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+  --glass-blur: blur(16px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] {
+  --bg-primary: #fafaf8;
+  --bg-secondary: #f2f2ee;
+  --bg-glass: rgba(0, 0, 0, 0.03);
+  --text-primary: #1a1a1a;
+  --text-secondary: #4d4d4d;
+  --text-muted: #8a8a8a;
+  --glass-border: 1px solid rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.08);
+  --shadow-glass: 0 8px 20px rgba(0, 0, 0, 0.1);
+}

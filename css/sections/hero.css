@@ -1,0 +1,44 @@
+.section-hero {
+  --spot-x: 50%;
+  --spot-y: 50%;
+}
+
+.section-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    28rem circle at var(--spot-x) var(--spot-y),
+    rgba(123, 45, 62, 0.2),
+    transparent 60%
+  );
+  transition: background-position var(--duration-fast) linear;
+}
+
+.section-hero .container {
+  justify-items: start;
+  transform-style: preserve-3d;
+}
+
+.hero-title {
+  transition: transform var(--duration-base) var(--ease-smooth),
+    color var(--duration-base) var(--ease-smooth);
+}
+
+.hero-subtitle {
+  max-width: 48ch;
+}
+
+.hero-next {
+  margin-top: var(--space-4);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  border: var(--glass-border);
+  color: var(--text-primary);
+  background: var(--bg-glass);
+}
+
+.hero-next:hover {
+  color: var(--accent);
+}
