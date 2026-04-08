@@ -11,6 +11,8 @@ export const initSkills = () => {
   const layers = qsa(".skill-layer");
   const panel = qs(".skills-panel");
   if (!layers.length || !panel) return () => {};
+  const panelTitle = qs(".skills-panel-title", panel);
+  const panelBody = qs(".skills-panel-body", panel);
 
   const cleanups = [];
 
@@ -19,7 +21,15 @@ export const initSkills = () => {
     layer.classList.add("is-selected");
 
     const key = layer.dataset.layer || "";
-    panel.textContent = layerDescription[key] || "레이어를 선택하면 역할 설명이 표시됩니다.";
+    const title = qs("h3", layer)?.textContent || "Layer Detail";
+    const body = layerDescription[key] || "레이어를 선택하면 역할 설명이 표시됩니다.";
+
+    if (panelTitle) panelTitle.textContent = title;
+    if (panelBody) panelBody.textContent = body;
+    panel.classList.remove("is-open");
+    requestAnimationFrame(() => {
+      panel.classList.add("is-open");
+    });
   };
 
   layers.forEach((layer) => {

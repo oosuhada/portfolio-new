@@ -29,4 +29,26 @@
   border-radius: var(--radius-md);
   background: var(--bg-glass);
   color: var(--text-secondary);
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity var(--duration-base) var(--ease-smooth),
+    transform var(--duration-base) var(--ease-smooth);
+}
+
+.skills-panel.is-open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.skills-panel-title {
+  position: relative;
+  z-index: 1;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+}
+
+.skills-panel-body {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-2);
 }

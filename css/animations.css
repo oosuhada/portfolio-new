@@ -1,0 +1,535 @@
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS.CSS  — "Minimalism with Depth"
+   Glassmorphism + Progressive Reveal + Scroll-driven motion
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Noise grain overlay (pseudo-film texture) ─────────── */
+body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: var(--noise-opacity);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+}
+
+/* ── 2. Ambient accent glow (background atmosphere) ──────── */
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  top: -30vh;
+  left: 50%;
+  translate: -50% 0;
+  width: min(900px, 120vw);
+  height: min(900px, 120vw);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--accent-glow) 0%,
+    transparent 70%
+  );
+  z-index: 0;
+  animation: ambientPulse 8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* ── 3. Scroll-reveal base (data-reveal attribute) ───────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+[data-reveal="left"]  { transform: translate(-32px, 0); }
+[data-reveal="right"] { transform: translate(32px, 0); }
+[data-reveal="scale"] { transform: scale(0.94) translateY(12px); }
+[data-reveal="fade"]  { transform: none; }
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* Stagger siblings */
+[data-reveal-group] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+[data-reveal-group].is-revealed > *:nth-child(1) { transition-delay: 0ms;    opacity: 1; transform: none; }
+[data-reveal-group].is-revealed > *:nth-child(2) { transition-delay: 80ms;   opacity: 1; transform: none; }
+[data-reveal-group].is-revealed > *:nth-child(3) { transition-delay: 160ms;  opacity: 1; transform: none; }
+[data-reveal-group].is-revealed > *:nth-child(4) { transition-delay: 240ms;  opacity: 1; transform: none; }
+[data-reveal-group].is-revealed > *:nth-child(5) { transition-delay: 320ms;  opacity: 1; transform: none; }
+[data-reveal-group].is-revealed > *:nth-child(6) { transition-delay: 400ms;  opacity: 1; transform: none; }
+
+/* ── 4. Page-load hero entrance ──────────────────────────── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(40px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes heroLineExpand {
+  from { scaleX: 0; }
+  to   { scaleX: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-eyebrow   { animation: heroFadeUp 0.8s var(--ease-out-expo) 0.1s both; }
+.hero-title     { animation: heroFadeUp 1s var(--ease-out-expo) 0.25s both; }
+.hero-subtitle  { animation: heroFadeUp 0.9s var(--ease-out-expo) 0.45s both; }
+.hero-cta       { animation: heroFadeUp 0.8s var(--ease-out-expo) 0.65s both; }
+
+/* ── 5. Glassmorphism cards ──────────────────────────────── */
+.glass-card {
+  position: relative;
+  background: var(--bg-glass);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition:
+    border-color var(--duration-base) var(--ease-smooth),
+    box-shadow   var(--duration-base) var(--ease-smooth),
+    transform    var(--duration-base) var(--ease-smooth),
+    background   var(--duration-base) var(--ease-smooth);
+}
+
+/* Shimmer border on hover */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.12) 0%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0.05) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-smooth);
+  pointer-events: none;
+}
+
+/* Inner glow from top-left */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.15) 40%,
+    rgba(255,255,255,0.08) 60%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  background:   var(--bg-glass-hover);
+  border-color: rgba(255, 255, 255, 0.13);
+  box-shadow:   var(--shadow-card), var(--shadow-accent);
+  transform: translateY(-3px) scale(1.005);
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+/* ── 6. Project cards ────────────────────────────────────── */
+.project-card {
+  cursor: pointer;
+  transform-origin: center bottom;
+  transition:
+    transform    var(--duration-base) var(--ease-spring),
+    box-shadow   var(--duration-base) var(--ease-smooth),
+    border-color var(--duration-base) var(--ease-smooth),
+    background   var(--duration-base) var(--ease-smooth);
+}
+
+.project-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: var(--shadow-card), 0 0 50px var(--accent-glow);
+  border-color: rgba(123, 45, 62, 0.35);
+  background: var(--bg-glass-hover);
+}
+
+.project-card.is-expanded {
+  position: fixed;
+  inset: var(--space-8);
+  z-index: 100;
+  overflow-y: auto;
+  transform: none !important;
+  animation: cardExpand 0.45s var(--ease-spring) both;
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+}
+
+@keyframes cardExpand {
+  from { opacity: 0; transform: scale(0.9); filter: blur(8px); }
+  to   { opacity: 1; transform: scale(1);   filter: blur(0); }
+}
+
+/* ── 7. Skill layers ─────────────────────────────────────── */
+.skill-layer {
+  cursor: pointer;
+  transition:
+    transform    var(--duration-base) var(--ease-spring),
+    border-color var(--duration-base) var(--ease-smooth),
+    background   var(--duration-base) var(--ease-smooth),
+    box-shadow   var(--duration-base) var(--ease-smooth);
+}
+
+.skill-layer:hover {
+  transform: translateX(6px);
+  border-color: rgba(123, 45, 62, 0.3);
+  background: var(--bg-glass-hover);
+}
+
+.skill-layer.is-selected {
+  border-color: var(--accent);
+  background: rgba(123, 45, 62, 0.08);
+  box-shadow: 0 0 30px rgba(123, 45, 62, 0.15),
+              inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.skill-layer.is-selected::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent) 20%,
+    var(--accent) 80%,
+    transparent
+  );
+  border-radius: 0 2px 2px 0;
+}
+
+.skills-panel {
+  opacity: 0;
+  transform: translateX(16px);
+  transition:
+    opacity   var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.skills-panel.is-open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── 8. Bridge section ────────────────────────────────────── */
+#bridge {
+  --bridge-progress: 0;
+  overflow: hidden;
+}
+
+.bridge-timeline-item {
+  opacity: calc(0.2 + var(--item-t, 0) * 0.8);
+  transform: translateX(calc((1 - var(--item-t, 0)) * 40px));
+  transition:
+    opacity   0.4s var(--ease-smooth),
+    transform 0.4s var(--ease-smooth);
+}
+
+/* Liquid morph progress line */
+.bridge-progress-line {
+  transform-origin: left;
+  transform: scaleX(var(--bridge-progress));
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+/* ── 9. Navigation ────────────────────────────────────────── */
+.site-header {
+  transition:
+    background var(--duration-base) var(--ease-smooth),
+    border-color var(--duration-base) var(--ease-smooth),
+    backdrop-filter var(--duration-base) var(--ease-smooth);
+}
+
+.global-nav a {
+  position: relative;
+  transition: color var(--duration-base) var(--ease-smooth);
+}
+
+.global-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-base) var(--ease-smooth);
+}
+
+.global-nav a:hover::after,
+.global-nav a.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── 10. Section headings — split-line reveal ─────────────── */
+.section-heading {
+  overflow: hidden;
+}
+
+.section-heading span {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.section-heading.is-revealed span {
+  transform: translateY(0);
+}
+
+/* Each line staggers */
+.section-heading.is-revealed span:nth-child(2) { transition-delay: 80ms; }
+.section-heading.is-revealed span:nth-child(3) { transition-delay: 160ms; }
+
+/* ── 11. Eyebrow label ───────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+}
+
+.eyebrow::before {
+  content: "";
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── 12. CTA / Buttons ───────────────────────────────────── */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  background: var(--accent);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  transition:
+    background   var(--duration-base) var(--ease-smooth),
+    box-shadow   var(--duration-base) var(--ease-smooth),
+    transform    var(--duration-base) var(--ease-smooth);
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255,255,255,0.2),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-smooth);
+}
+
+.btn-primary:hover {
+  background: var(--accent-bright);
+  box-shadow: 0 4px 24px var(--accent-glow), 0 0 0 1px var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary:active         { transform: translateY(0); }
+
+/* Ghost variant */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  border: var(--glass-border);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  transition:
+    border-color var(--duration-base) var(--ease-smooth),
+    color        var(--duration-base) var(--ease-smooth),
+    background   var(--duration-base) var(--ease-smooth),
+    transform    var(--duration-base) var(--ease-smooth);
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.18);
+  color: var(--text-primary);
+  background: var(--bg-glass-hover);
+  transform: translateY(-2px);
+}
+
+/* ── 13. Contact links ────────────────────────────────────── */
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  border: var(--glass-border);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  transition:
+    border-color var(--duration-base) var(--ease-smooth),
+    color        var(--duration-base) var(--ease-smooth),
+    background   var(--duration-base) var(--ease-smooth),
+    transform    var(--duration-base) var(--ease-spring),
+    box-shadow   var(--duration-base) var(--ease-smooth);
+}
+
+.contact-link:hover {
+  border-color: rgba(123, 45, 62, 0.4);
+  color: var(--text-primary);
+  background: rgba(123, 45, 62, 0.06);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(123, 45, 62, 0.15);
+}
+
+/* ── 14. Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── 15. Selection ───────────────────────────────────────── */
+::selection {
+  background: var(--accent);
+  color: var(--text-primary);
+}
+
+/* ── 16. Focus visible ───────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ── 17. Cursor spotlight (applied via JS) ────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  pointer-events: none;
+  z-index: 10000;
+  translate: -50% -50%;
+  mix-blend-mode: screen;
+  transition: transform var(--duration-fast) var(--ease-smooth);
+  will-change: translate;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(123, 45, 62, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+  translate: -50% -50%;
+  transition:
+    translate 80ms linear,
+    width    var(--duration-base) var(--ease-spring),
+    height   var(--duration-base) var(--ease-spring),
+    border-color var(--duration-base) var(--ease-smooth);
+  will-change: translate;
+}
+
+.cursor-ring.is-hovering {
+  width: 56px; height: 56px;
+  border-color: var(--accent);
+}
+
+/* ── 18. Section active state ─────────────────────────────── */
+.section.is-active .eyebrow {
+  color: var(--accent);
+}
+
+/* ── 19. About lines ─────────────────────────────────────── */
+.about-line {
+  padding: var(--space-4) 0;
+  border-bottom: var(--glass-border);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-6);
+  transition: color var(--duration-base) var(--ease-smooth);
+}
+
+.about-line:hover { color: var(--text-primary); }
+
+.about-line-label {
+  min-width: 120px;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* ── 20. Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:   0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:  0.01ms !important;
+  }
+
+  body::before,
+  body::after { display: none; }
+}

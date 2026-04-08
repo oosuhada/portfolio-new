@@ -41,12 +41,14 @@
       <main>
         <section id="hero" class="section section-hero" data-section="hero">
           <div class="container">
-            <p class="eyebrow">Identity</p>
-            <h1 class="hero-title" data-role-index="0">Developer</h1>
+            <p class="eyebrow hero-eyebrow">Identity</p>
+            <h1 class="hero-title" data-index="0">Developer</h1>
             <p class="hero-subtitle">
               나는 코드를 짜는 사람이 아니라, 경험을 빚는 사람입니다.
             </p>
-            <button class="hero-next" type="button">다음 정체성 보기</button>
+            <button class="hero-next hero-cta btn-ghost" type="button">
+              다음 정체성 보기
+            </button>
           </div>
         </section>
 
@@ -57,10 +59,30 @@
           aria-label="Storytelling"
         >
           <div class="container">
-            <p class="eyebrow">Bridge</p>
-            <h2>오프라인 감각을 디지털 경험으로 연결합니다.</h2>
-            <div class="bridge-viewport">
-              <div class="bridge-track" aria-label="커리어 브릿지 타임라인">
+            <p class="eyebrow" data-reveal="fade">Bridge</p>
+            <h2 data-reveal>오프라인 감각을 디지털 경험으로 연결합니다.</h2>
+            <div class="bridge-sticky">
+              <div class="bridge-viewport">
+                <div class="bridge-media">
+                  <figure class="bridge-media-panel">
+                    <figcaption>Wine Bar Space</figcaption>
+                  </figure>
+                  <figure class="bridge-media-panel">
+                    <figcaption>Code Terminal</figcaption>
+                  </figure>
+                </div>
+                <svg
+                  class="bridge-flow"
+                  viewBox="0 0 1200 120"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M20 60 C 220 20, 380 100, 600 60 S 980 20, 1180 60"
+                    pathLength="100"
+                  />
+                </svg>
+                <div class="bridge-track" aria-label="커리어 브릿지 타임라인">
                 <article class="bridge-stop">
                   <h3>와인바 운영</h3>
                   <p>오프라인에서 사람의 선택을 관찰했다.</p>
@@ -77,6 +99,7 @@
                   <h3>AI 풀스택 과정</h3>
                   <p>아이디어를 끝까지 구현할 수 있게 됐다.</p>
                 </article>
+                </div>
               </div>
             </div>
           </div>
@@ -88,24 +111,100 @@
           data-section="projects"
         >
           <div class="container">
-            <p class="eyebrow">Projects</p>
-            <h2>문제, 해결, 결과로 증명한 프로젝트</h2>
+            <p class="eyebrow" data-reveal="fade">Projects</p>
+            <h2 data-reveal>문제, 해결, 결과로 증명한 프로젝트</h2>
             <div class="projects-grid" role="list" aria-label="프로젝트 목록">
-              <article class="project-card is-large" role="listitem" tabindex="0">
+              <article
+                class="project-card glass-card project-card--hero"
+                role="listitem"
+                tabindex="0"
+              >
                 <h3>Uncorked</h3>
                 <p>와인 경험을 디지털 여정으로 번역한 서비스</p>
+                <dl class="project-case">
+                  <div>
+                    <dt>문제</dt>
+                    <dd>오프라인 와인 경험은 온라인에서 맥락이 사라진다.</dd>
+                  </div>
+                  <div>
+                    <dt>해결</dt>
+                    <dd>취향 기반 탐색 흐름과 스토리형 카드 UI를 설계했다.</dd>
+                  </div>
+                  <div>
+                    <dt>결과</dt>
+                    <dd>탐색 시간이 줄고 저장/재방문 흐름이 자연스러워졌다.</dd>
+                  </div>
+                </dl>
+                <p class="project-decision">
+                  가장 어려웠던 결정: 감성적 브랜딩과 검색 효율 사이의 균형.
+                </p>
               </article>
-              <article class="project-card is-large" role="listitem" tabindex="0">
+              <article
+                class="project-card glass-card project-card--wide"
+                role="listitem"
+                tabindex="0"
+              >
                 <h3>EZAir</h3>
                 <p>복잡한 항공 탐색을 단순화한 예약 경험</p>
+                <dl class="project-case">
+                  <div>
+                    <dt>문제</dt>
+                    <dd>항공권 필터가 복잡해 사용자가 초기에 이탈했다.</dd>
+                  </div>
+                  <div>
+                    <dt>해결</dt>
+                    <dd>핵심 필터 우선 노출과 단계형 검색 플로우를 도입했다.</dd>
+                  </div>
+                  <div>
+                    <dt>결과</dt>
+                    <dd>검색 완료율이 올라가고 비교 시간이 단축됐다.</dd>
+                  </div>
+                </dl>
+                <p class="project-decision">
+                  가장 어려웠던 결정: 옵션 다양성과 초기 화면 단순성의 트레이드오프.
+                </p>
               </article>
-              <article class="project-card" role="listitem" tabindex="0">
+              <article class="project-card glass-card" role="listitem" tabindex="0">
                 <h3>PortfoliOh</h3>
                 <p>하이라이터 중심 포트폴리오 UX 실험</p>
+                <dl class="project-case">
+                  <div>
+                    <dt>문제</dt>
+                    <dd>포트폴리오가 읽기만 하는 페이지로 끝나는 한계가 있었다.</dd>
+                  </div>
+                  <div>
+                    <dt>해결</dt>
+                    <dd>하이라이트 상호작용으로 사용자 참여를 유도했다.</dd>
+                  </div>
+                  <div>
+                    <dt>결과</dt>
+                    <dd>사용자 체류와 피드백 수집 가능성이 높아졌다.</dd>
+                  </div>
+                </dl>
+                <p class="project-decision">
+                  가장 어려웠던 결정: 기능 실험성과 정보 전달 밀도의 균형.
+                </p>
               </article>
-              <article class="project-card" role="listitem" tabindex="0">
+              <article class="project-card glass-card" role="listitem" tabindex="0">
                 <h3>Dev Quest</h3>
                 <p>학습 과정을 제품처럼 설계한 진행형 프로젝트</p>
+                <dl class="project-case">
+                  <div>
+                    <dt>문제</dt>
+                    <dd>학습 기록이 단절되어 성장 흐름을 보여주기 어려웠다.</dd>
+                  </div>
+                  <div>
+                    <dt>해결</dt>
+                    <dd>퀘스트형 진행 구조와 시각적 진행 상태를 도입했다.</dd>
+                  </div>
+                  <div>
+                    <dt>결과</dt>
+                    <dd>학습 지속성이 향상되고 회고가 쉬워졌다.</dd>
+                  </div>
+                </dl>
+                <p class="project-decision">
+                  가장 어려웠던 결정: 개발 속도와 완성도 기준 설정.
+                </p>
               </article>
             </div>
           </div>
@@ -113,8 +212,9 @@
 
         <section id="skills" class="section section-skills" data-section="skills">
           <div class="container">
-            <p class="eyebrow">Skills</p>
-            <h2>기술을 쌓는 대신 문제 해결 레이어를 설계합니다.</h2>
+            <p class="eyebrow" data-reveal="fade">Skills</p>
+            <h2 data-reveal>기술을 쌓는 대신 문제 해결 레이어를 설계합니다.</h2>
+            <div class="skills-layout">
             <div class="skills-layers" aria-label="기술 레이어">
               <article class="skill-layer" data-layer="ai">
                 <h3>AI / Product Layer</h3>
@@ -129,15 +229,19 @@
                 <p>HTML/CSS/JS, React(학습 중), UX 설계</p>
               </article>
             </div>
-            <aside class="skills-panel" aria-live="polite"></aside>
+            <aside class="skills-panel" aria-live="polite">
+              <h3 class="skills-panel-title">Layer Detail</h3>
+              <p class="skills-panel-body"></p>
+            </aside>
+            </div>
           </div>
         </section>
 
         <section id="about" class="section section-about" data-section="about">
           <div class="container">
-            <p class="eyebrow">About</p>
-            <h2>스크롤로 완성되는 자기소개</h2>
-            <div class="about-lines">
+            <p class="eyebrow" data-reveal="fade">About</p>
+            <h2 data-reveal>스크롤로 완성되는 자기소개</h2>
+            <div class="about-lines" data-reveal-group>
               <p class="about-line">
                 오프라인 공간에서 고객 경험을 설계하는 일을 해왔습니다.
               </p>
@@ -156,18 +260,25 @@
                 목표는 더 많은 사람이 실제로 사용하는 서비스를 만드는 것입니다.
               </p>
             </div>
-            <a class="about-cta" href="#contact">같이 만들어볼까요?</a>
+            <a class="about-cta btn-primary" data-reveal="fade" href="#contact"
+              >같이 만들어볼까요?</a>
           </div>
         </section>
 
         <section id="contact" class="section section-contact" data-section="contact">
           <div class="container">
-            <p class="eyebrow">Contact</p>
-            <h2>같이 만들어볼까요?</h2>
+            <p class="eyebrow" data-reveal="fade">Contact</p>
+            <h2 data-reveal>같이 만들어볼까요?</h2>
             <ul class="contact-links">
-              <li><a href="mailto:hello@example.com">Email</a></li>
-              <li><a href="#" aria-label="GitHub">GitHub</a></li>
-              <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+              <li>
+                <a class="contact-link" href="mailto:hello@example.com">Email</a>
+              </li>
+              <li>
+                <a class="contact-link" href="#" aria-label="GitHub">GitHub</a>
+              </li>
+              <li>
+                <a class="contact-link" href="#" aria-label="LinkedIn">LinkedIn</a>
+              </li>
             </ul>
           </div>
         </section>

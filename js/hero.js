@@ -13,7 +13,7 @@ export const initHero = () => {
 
   const updateRole = () => {
     title.textContent = roles[roleIndex];
-    title.setAttribute("data-role-index", String(roleIndex));
+    title.setAttribute("data-index", String(roleIndex));
   };
 
   const moveSpotlight = rafThrottle((event) => {
