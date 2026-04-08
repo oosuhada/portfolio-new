@@ -1,19 +1,51 @@
 import { clamp, on, qs, rafThrottle } from "./utils.js";
 
-const roles = ["Developer", "Designer", "Wine Bar Owner", "Product Engineer"];
+const identities = [
+  {
+    label: "Developer",
+    subtitle:
+      "나는 코드를 짜는 사람이 아니라, 경험을 빚는 사람입니다.",
+  },
+  {
+    label: "Designer",
+    subtitle:
+      "나는 화면을 꾸미는 사람이 아니라, 이해와 선택을 돕는 맥락을 설계하는 사람입니다.",
+  },
+  {
+    label: "Wine Bar Owner",
+    subtitle:
+      "나는 잔을 채우는 사람이 아니라, 사람과 순간을 잇는 공간을 만드는 사람입니다.",
+  },
+  {
+    label: "Product Engineer",
+    subtitle:
+      "나는 기능을 나열하는 사람이 아니라, 문제 끝까지 책임지는 제품을 완성하는 사람입니다.",
+  },
+];
 
 export const initHero = () => {
   const hero = qs("#hero");
   const title = qs(".hero-title", hero);
+  const subtitle = qs(".hero-subtitle", hero);
+  const prevButton = qs(".hero-prev", hero);
   const nextButton = qs(".hero-next", hero);
-  if (!hero || !title || !nextButton) return () => {};
+  if (!hero || !title || !subtitle || !prevButton || !nextButton) return () => {};
 
   let roleIndex = 0;
   const cleanups = [];
 
   const updateRole = () => {
-    title.textContent = roles[roleIndex];
+    const current = identities[roleIndex];
+    title.textContent = current.label;
     title.setAttribute("data-index", String(roleIndex));
+    subtitle.textContent = current.subtitle;
+
+    const isFirst = roleIndex === 0;
+    const isLast = roleIndex === identities.length - 1;
+    prevButton.toggleAttribute("hidden", isFirst);
+    nextButton.toggleAttribute("hidden", isLast);
+    prevButton.setAttribute("aria-hidden", isFirst ? "true" : "false");
+    nextButton.setAttribute("aria-hidden", isLast ? "true" : "false");
   };
 
   const moveSpotlight = rafThrottle((event) => {
@@ -37,13 +69,44 @@ export const initHero = () => {
     }),
   );
 
-  const nextRole = () => {
-    roleIndex = Math.min(roleIndex + 1, roles.length - 1);
+  const markIdentityNavigated = () => {
+    hero.classList.remove("hero--identity-pristine");
+  };
+
+  const prevRole = () => {
+    const nextIndex = Math.max(roleIndex - 1, 0);
+    if (nextIndex === roleIndex) return;
+    markIdentityNavigated();
+    roleIndex = nextIndex;
     updateRole();
   };
 
-  cleanups.push(on(nextButton, "click", nextRole));
-  cleanups.push(on(hero, "click", nextRole));
+  const nextRole = () => {
+    const nextIndex = Math.min(roleIndex + 1, identities.length - 1);
+    if (nextIndex === roleIndex) return;
+    markIdentityNavigated();
+    roleIndex = nextIndex;
+    updateRole();
+  };
+
+  const onPrevClick = (event) => {
+    event.stopPropagation();
+    prevRole();
+  };
+  const onNextClick = (event) => {
+    event.stopPropagation();
+    nextRole();
+  };
+  cleanups.push(on(prevButton, "click", onPrevClick));
+  cleanups.push(on(nextButton, "click", onNextClick));
+
+  const onHeroClick = (event) => {
+    if (event.target.closest("button, a")) return;
+    if (roleIndex >= identities.length - 1) return;
+    nextRole();
+  };
+  cleanups.push(on(hero, "click", onHeroClick));
+
   updateRole();
 
   return () => cleanups.forEach((cleanup) => cleanup());

@@ -95,7 +95,18 @@ body::before {
 .hero-eyebrow   { animation: heroFadeUp 0.8s var(--ease-out-expo) 0.1s both; }
 .hero-title     { animation: heroFadeUp 1s var(--ease-out-expo) 0.25s both; }
 .hero-subtitle  { animation: heroFadeUp 0.9s var(--ease-out-expo) 0.45s both; }
-.hero-cta       { animation: heroFadeUp 0.8s var(--ease-out-expo) 0.65s both; }
+
+/* CTA: 최초 진입(pristine) 시에만 입장 애니메이션, 정체성 전환 후에는 즉시 표시 */
+#hero.hero--identity-pristine .hero-cta {
+  animation: heroFadeUp 0.8s var(--ease-out-expo) 0.65s both;
+}
+
+#hero:not(.hero--identity-pristine) .hero-cta {
+  animation: none;
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
 
 /* ── 5. Glassmorphism cards ──────────────────────────────── */
 .glass-card {

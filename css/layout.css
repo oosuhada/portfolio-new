@@ -54,7 +54,17 @@ body {
   gap: var(--space-4);
 }
 
+.header-nav-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
 .brand {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-display);
   font-size: var(--text-lg);
   color: var(--text-primary);
@@ -113,7 +123,7 @@ body {
 }
 
 .hero-subtitle {
-  max-width: 52ch;
+  max-width: min(72ch, 100%);
   color: var(--text-secondary);
 }
 
@@ -286,9 +296,52 @@ body {
     width: min(100% - 1.5rem, var(--container-max));
   }
 
-  .header-inner { min-height: 56px; }
+  .header-inner {
+    min-height: 56px;
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
 
-  .global-nav { gap: var(--space-4); }
+  /* 브랜드 탭: 오른쪽으로 패널 펼침 · 넓으면 가로 스크롤(터치/드래그) */
+  .header-nav-wrap {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 0;
+    opacity: 0;
+    justify-content: flex-start;
+    overflow: hidden;
+    pointer-events: none;
+    transition:
+      max-width 0.4s var(--ease-smooth, cubic-bezier(0.16, 1, 0.3, 1)),
+      opacity 0.25s var(--ease-smooth, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  .site-header.is-nav-open .header-nav-wrap {
+    max-width: calc(100% - 9rem);
+    opacity: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    pointer-events: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .site-header.is-nav-open .header-nav-wrap::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .global-nav {
+    flex-wrap: nowrap;
+    gap: var(--space-4);
+    width: max-content;
+    max-width: none;
+    padding-block: var(--space-1);
+  }
 
   .projects-grid         { grid-template-columns: 1fr; }
   .project-card,

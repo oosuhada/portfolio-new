@@ -27,11 +27,25 @@
 }
 
 .hero-subtitle {
-  max-width: 48ch;
+  max-width: min(72ch, 100%);
 }
 
-.hero-next {
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
   margin-top: var(--space-4);
+}
+
+/* .btn-ghost 등이 display를 덮어써서 [hidden]이 무시되는 경우 방지 */
+.hero-prev[hidden],
+.hero-next[hidden] {
+  display: none !important;
+}
+
+.hero-prev,
+.hero-next {
   padding: 0.65rem 1rem;
   border-radius: var(--radius-sm);
   border: var(--glass-border);
@@ -39,6 +53,7 @@
   background: var(--bg-glass);
 }
 
+.hero-prev:hover,
 .hero-next:hover {
   color: var(--accent);
 }

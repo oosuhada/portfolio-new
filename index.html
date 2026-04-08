@@ -25,30 +25,55 @@
   </head>
   <body>
     <div id="app">
-      <header class="site-header">
+      <header class="site-header" id="site-header">
         <div class="container header-inner">
-          <a class="brand" href="#hero" aria-label="홈으로 이동">Gabriel</a>
-          <nav class="global-nav" aria-label="주요 섹션">
-            <a href="#hero">Hero</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </nav>
+          <a
+            class="brand"
+            id="site-header-brand"
+            href="#hero"
+            aria-controls="site-nav"
+            aria-label="oosuhada"
+            >oosuhada</a>
+          <div class="header-nav-wrap">
+            <nav
+              id="site-nav"
+              class="global-nav"
+              aria-label="주요 섹션"
+            >
+              <a href="#hero">Hero</a>
+              <a href="#projects">Projects</a>
+              <a href="#skills">Skills</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+            </nav>
+          </div>
         </div>
       </header>
 
       <main>
-        <section id="hero" class="section section-hero" data-section="hero">
+        <section
+          id="hero"
+          class="section section-hero hero--identity-pristine"
+          data-section="hero"
+        >
           <div class="container">
             <p class="eyebrow hero-eyebrow">Identity</p>
             <h1 class="hero-title" data-index="0">Developer</h1>
             <p class="hero-subtitle">
               나는 코드를 짜는 사람이 아니라, 경험을 빚는 사람입니다.
             </p>
-            <button class="hero-next hero-cta btn-ghost" type="button">
-              다음 정체성 보기
-            </button>
+            <div class="hero-actions">
+              <button
+                class="hero-prev hero-cta btn-ghost"
+                type="button"
+                hidden
+              >
+                이전 정체성 보기
+              </button>
+              <button class="hero-next hero-cta btn-ghost" type="button">
+                다음 정체성 보기
+              </button>
+            </div>
           </div>
         </section>
 

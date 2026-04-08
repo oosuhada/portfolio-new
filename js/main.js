@@ -6,6 +6,7 @@ import { initHero }     from "./hero.js";
 import { initProjects } from "./projects.js";
 import { initSkills }   from "./skills.js";
 import { initCursor, initScrollReveal, initCardTilt, initAmbientScroll } from "./effects.js";
+import { initHeaderNav } from "./header.js";
 import { on, qsa } from "./utils.js";
 
 let sectionObserver;
@@ -31,6 +32,7 @@ const initAnchorScroll = () => {
 const init = () => {
   sectionObserver = createSectionObserver();
 
+  cleanupFns.push(initHeaderNav());
   initAnchorScroll();
 
   // Section modules
